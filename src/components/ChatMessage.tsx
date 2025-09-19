@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
-import { Bot } from 'lucide-react';
+import { Brain } from 'lucide-react';
 
 interface ChatMessageProps {
   role: 'user' | 'agent';
@@ -35,8 +35,8 @@ export function ChatMessage({
     >
       {/* Avatar for agent messages (left side) */}
       {!isUser && showAvatar && (
-        <div className="shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-ainleuchtend-primary to-blue-600 rounded-lg flex items-center justify-center text-white mt-1">
-          <Bot className="w-3 h-3" />
+        <div className="shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-ainleuchtend-primary to-blue-600 rounded-xl flex items-center justify-center text-white mt-1 shadow-lg">
+          <Brain className="w-4 h-4" />
         </div>
       )}
 

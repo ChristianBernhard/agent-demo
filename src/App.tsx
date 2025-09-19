@@ -6,7 +6,7 @@ import { HITLCard } from './components/HITLCard';
 import { useRunner } from './hooks/useRunner';
 import { loadContent } from './utils/content';
 import type { AppState } from './types';
-import { FileText, Download, Bot, Wand2, Hammer } from 'lucide-react';
+import { FileText, Download, Brain, Sparkles, Settings, Zap, Users, Target, Award, Lightbulb, ChevronRight, Play } from 'lucide-react';
 
 function App() {
   const [appState, setAppState] = useState<AppState>('idle');
@@ -55,24 +55,24 @@ function App() {
     {
       term: 'Tools',
       description: 'Externe Funktionen/Systeme, die der Agent gezielt nutzt (Websuche, Datenbankabfragen, Kalenderzugriffe, Wetter-APIs …).',
-      icon: Hammer
+      icon: Settings
     },
     {
       term: 'Action',
       description: 'Der Agent ruft sich oder ein Tool auf, um Informationen zu holen oder etwas auszuführen.',
-      icon: Wand2
+      icon: Zap
     },
     {
       term: 'Feedback',
       description: 'Das Tool liefert ein Ergebnis zurück - der Agent reflektiert und entscheidet, was als Nächstes passiert.',
-      icon: Bot
+      icon: Brain
     }
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-blue-50/30 to-slate-50 p-4">
       <div className="max-w-6xl mx-auto">
-        {/* Header with Logo */}
+        {/* Enhanced Header with Logo and Status */}
         <motion.div 
           className="text-center mb-8"
           initial={{ opacity: 0, y: -20 }}
@@ -86,52 +86,77 @@ function App() {
               className="h-16 w-auto"
             />
           </div>
-          <h1 className="text-4xl font-bold text-ainleuchtend-dark mb-2">
-            Agentic AI Demo
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <h1 className="text-4xl font-bold text-ainleuchtend-dark">
+              Agentic AI Demo
+            </h1>
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Sparkles className="w-8 h-8 text-ainleuchtend-primary" />
+            </motion.div>
+          </div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto flex items-center justify-center gap-2">
+            <Brain className="w-5 h-5 text-ainleuchtend-primary" />
             Erleben Sie intelligente KI-Agenten in Aktion
           </p>
         </motion.div>
 
-        {/* Theory Section */}
+        {/* Enhanced Theory Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-8"
         >
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 shadow-lg">
-            <h2 className="text-2xl font-semibold text-ainleuchtend-dark mb-4 text-center">
-              Agentic AI – kurz erklärt
-            </h2>
-            <p className="text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto text-center mb-8">
-              Ein klassischer LLM-Aufruf: Du gibst Input, das Modell denkt, und es kommt eine Antwort heraus. 
-              Agentic AI geht einen Schritt weiter: Das Modell kann eigenständig Tools nutzen (z. B. Websuche, Datenbank, Kalender), 
-              Actions ausführen und anhand des Feedbacks der Tools den nächsten Schritt planen.
-            </p>
+          <div className="bg-gradient-to-br from-white via-blue-50/20 to-white backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 shadow-xl relative overflow-hidden">
+            <div>
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-gradient-to-br from-ainleuchtend-primary to-blue-600 rounded-xl flex items-center justify-center">
+                  <Lightbulb className="w-5 h-5 text-white" />
+                </div>
+                <h2 className="text-3xl font-bold text-ainleuchtend-dark">
+                  Agentic AI – kurz erklärt
+                </h2>
+              </div>
+              
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-blue-100/50">
+                <p className="text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto text-center">
+                  Ein klassischer LLM-Aufruf: Du gibst Input, das Modell denkt, und es kommt eine Antwort heraus. 
+                  <span className="font-semibold text-ainleuchtend-primary"> Agentic AI geht einen Schritt weiter:</span> Das Modell kann eigenständig Tools nutzen (z. B. Websuche, Datenbank, Kalender), 
+                  Actions ausführen und anhand des Feedbacks der Tools den nächsten Schritt planen.
+                </p>
+              </div>
 
-            {/* Glossary Section */}
-            <div className="grid md:grid-cols-3 gap-6">
-              {glossaryItems.map((item, index) => {
-                const IconComponent = item.icon;
-                return (
-                  <motion.div
-                    key={item.term}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
-                    whileHover={{ scale: 1.02 }}
-                    className="bg-gradient-to-br from-white to-blue-50/50 backdrop-blur-xl rounded-xl p-6 border border-blue-200/30 shadow-sm text-center"
-                  >
-                    <div className="w-12 h-12 bg-gradient-to-br from-ainleuchtend-primary to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-                      <IconComponent className="w-6 h-6 text-white" />
-                    </div>
-                    <h4 className="font-semibold text-ainleuchtend-dark mb-3 text-lg">{item.term}</h4>
-                    <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
-                  </motion.div>
-                );
-              })}
+              {/* Enhanced Glossary Section */}
+              <div className="grid md:grid-cols-3 gap-6">
+                {glossaryItems.map((item, index) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <motion.div
+                      key={item.term}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      className="bg-gradient-to-br from-white to-blue-50/50 backdrop-blur-xl rounded-2xl p-6 border border-blue-200/30 shadow-lg text-center group hover:shadow-xl transition-all duration-300"
+                    >
+                      <motion.div 
+                        className="w-14 h-14 bg-gradient-to-br from-ainleuchtend-primary to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:rotate-6 transition-transform duration-300"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <IconComponent className="w-7 h-7 text-white" />
+                      </motion.div>
+                      <h4 className="font-bold text-ainleuchtend-dark mb-3 text-xl">{item.term}</h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                      <div className="mt-4 flex justify-center">
+                        <ChevronRight className="w-4 h-4 text-ainleuchtend-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </motion.div>
@@ -143,22 +168,39 @@ function App() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          {/* Header with Replay Button */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-200/50">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-ainleuchtend-primary to-blue-600 rounded-lg flex items-center justify-center">
-                <Bot className="w-4 h-4 text-white" />
+          {/* Enhanced Header with Status */}
+          <div className="flex items-center justify-between p-6 border-b border-gray-200/50 bg-gradient-to-r from-white to-blue-50/30">
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <div className="w-10 h-10 bg-gradient-to-br from-ainleuchtend-primary to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <Brain className="w-5 h-5 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"></div>
               </div>
-              <h2 className="font-semibold text-ainleuchtend-dark">KI-Beratungsagent</h2>
+              <div>
+                <h2 className="font-bold text-ainleuchtend-dark text-lg">KI-Beratungsagent</h2>
+                <p className="text-xs text-gray-500 flex items-center gap-1">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  Bereit für Ihre Anfrage
+                </p>
+              </div>
             </div>
-            {(appState !== 'idle' || runner.messages.length > 0) && (
-              <button
-                onClick={handleReplay}
-                className="h-8 px-3 rounded-lg text-xs text-gray-600 border border-gray-300 bg-white hover:bg-gray-50 transition-all duration-200"
-              >
-                Neu starten
-              </button>
-            )}
+            <div className="flex items-center gap-3">
+              {(appState !== 'idle' || runner.messages.length > 0) && (
+                <button
+                  onClick={handleReplay}
+                  className="h-9 px-4 rounded-xl text-sm text-gray-600 border border-gray-300 bg-white hover:bg-gray-50 transition-all duration-200 flex items-center gap-2 shadow-sm"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  Neu starten
+                </button>
+              )}
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+              </div>
+            </div>
           </div>
 
           {/* Chat Messages */}
@@ -337,76 +379,129 @@ function App() {
                 </ChatMessage>
               )}
 
-              {/* Empty State - Welcome */}
+              {/* Enhanced Welcome State */}
               {runner.messages.length === 0 && (
                 <div className="flex justify-center items-center min-h-[400px] py-8">
-                  <div className="max-w-2xl w-full mx-4">
-                    <div className="bg-gradient-to-br from-white to-blue-50/50 backdrop-blur-md border border-gray-200/50 rounded-xl p-8 shadow-lg">
-                      {/* Header */}
-                      <div className="text-center mb-8">
-                        <div className="w-16 h-16 bg-gradient-to-br from-ainleuchtend-primary to-blue-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                          <Bot className="w-8 h-8 text-white" />
+                  <div className="max-w-3xl w-full mx-4">
+                    <motion.div 
+                      className="bg-gradient-to-br from-white via-blue-50/30 to-white backdrop-blur-md border border-gray-200/50 rounded-3xl p-10 shadow-2xl relative overflow-hidden"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      
+                      <div className="relative z-10">
+                        {/* Enhanced Header */}
+                        <div className="text-center mb-10">
+                          <motion.div 
+                            className="w-20 h-20 bg-gradient-to-br from-ainleuchtend-primary to-blue-600 rounded-3xl mx-auto mb-6 flex items-center justify-center shadow-2xl"
+                            animate={{ 
+                              boxShadow: [
+                                "0 10px 30px rgba(37, 99, 235, 0.3)",
+                                "0 10px 40px rgba(37, 99, 235, 0.4)",
+                                "0 10px 30px rgba(37, 99, 235, 0.3)"
+                              ]
+                            }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                          >
+                            <Brain className="w-10 h-10 text-white" />
+                          </motion.div>
+                          <h1 className="text-3xl font-bold text-ainleuchtend-dark mb-3 flex items-center justify-center gap-3">
+                            KI-Beratungsagent
+                            <motion.div
+                              animate={{ scale: [1, 1.2, 1] }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                            >
+                              <Sparkles className="w-6 h-6 text-ainleuchtend-primary" />
+                            </motion.div>
+                          </h1>
+                          <p className="text-gray-600 text-lg">Intelligente Strategieentwicklung für moderne Unternehmen</p>
                         </div>
-                        <h1 className="text-2xl font-bold text-ainleuchtend-dark mb-2">KI-Beratungsagent</h1>
-                        <p className="text-gray-600 text-sm">Intelligente Strategieentwicklung für moderne Unternehmen</p>
-                      </div>
 
-                      {/* Process Steps */}
-                      <div className="mb-8">
-                        <h3 className="font-medium text-gray-700 mb-4 text-center text-sm">So funktioniert's:</h3>
-                        <div className="space-y-3 text-sm text-gray-600">
-                          {[
-                            'Analysiert Ihre aktuelle IT-Infrastruktur',
-                            'Identifiziert KI-Anwendungsfälle und Potenziale',
-                            'Entwickelt eine 3-Phasen Technologie-Roadmap',
-                            'Erstellt ein maßgeschneidertes Schulungskonzept',
-                            'Generiert ein umfassendes Strategiedokument'
-                          ].map((step, i) => (
-                            <div key={i} className="flex items-center gap-3">
-                              <span className="w-6 h-6 bg-ainleuchtend-primary/10 rounded-full flex items-center justify-center text-xs text-ainleuchtend-primary font-medium">
-                                {i + 1}
-                              </span>
-                              <span>{step}</span>
+                        {/* Enhanced Process Steps */}
+                        <div className="mb-10">
+                          <div className="flex items-center justify-center gap-2 mb-6">
+                            <Target className="w-5 h-5 text-ainleuchtend-primary" />
+                            <h3 className="font-semibold text-gray-700 text-lg">So funktioniert's:</h3>
+                          </div>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            {[
+                              { icon: Users, text: 'Analysiert Ihre aktuelle IT-Infrastruktur' },
+                              { icon: Target, text: 'Identifiziert KI-Anwendungsfälle und Potenziale' },
+                              { icon: Settings, text: 'Entwickelt eine 3-Phasen Technologie-Roadmap' },
+                              { icon: Award, text: 'Erstellt ein maßgeschneidertes Schulungskonzept' },
+                              { icon: FileText, text: 'Generiert ein umfassendes Strategiedokument' }
+                            ].map((step, i) => (
+                              <motion.div 
+                                key={i} 
+                                className="flex items-center gap-3 p-3 rounded-xl bg-white/60 border border-blue-100/50 hover:bg-white/80 transition-all duration-200"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.1 * i }}
+                                whileHover={{ x: 5 }}
+                              >
+                                <div className="w-8 h-8 bg-gradient-to-br from-ainleuchtend-primary to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                  <step.icon className="w-4 h-4 text-white" />
+                                </div>
+                                <span className="text-sm text-gray-700">{step.text}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Enhanced Call to Action */}
+                        <div className="text-center">
+                          <div className="bg-gradient-to-r from-ainleuchtend-primary/10 to-blue-600/10 rounded-2xl p-6 mb-6">
+                            <p className="text-gray-700 text-lg mb-2 flex items-center justify-center gap-2">
+                              <Play className="w-5 h-5 text-ainleuchtend-primary" />
+                              <span className="font-semibold">Klicken Sie Send,</span> um die KI-Beratung zu starten
+                            </p>
+                            <div className="inline-flex items-center text-sm text-gray-600 bg-white/70 px-4 py-2 rounded-full backdrop-blur-sm border border-blue-200/50">
+                              <motion.div 
+                                className="w-2 h-2 bg-green-400 rounded-full mr-2"
+                                animate={{ scale: [1, 1.3, 1] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                              />
+                              Demo-Modus • Mittelständisches Unternehmen Beispiel
                             </div>
-                          ))}
+                          </div>
                         </div>
                       </div>
-
-                      {/* Call to Action */}
-                      <div className="text-center">
-                        <p className="text-gray-600 text-sm mb-4">
-                          <span className="font-medium">Klicken Sie Send,</span> um die KI-Beratung zu starten
-                        </p>
-                        <div className="inline-flex items-center text-xs text-gray-500 bg-gray-50/50 px-3 py-1 rounded-full backdrop-blur-sm">
-                          <span className="w-2 h-2 bg-green-400/60 rounded-full mr-2"></span>
-                          Demo-Modus • Mittelständisches Unternehmen Beispiel
-                        </div>
-                      </div>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               )}
             </div>
           </div>
           
-          {/* Chat Input Inside */}
-          <div className="border-t border-gray-200/50 p-4">
-            <div className="flex gap-3 items-center max-w-4xl mx-auto">
-              <div className="flex-1 rounded-xl px-4 py-3 bg-gray-50/80 backdrop-blur-sm text-gray-700 text-sm border border-gray-200/50">
-                {content.prompt}
+          {/* Enhanced Chat Input */}
+          <div className="border-t border-gray-200/50 p-6 bg-gradient-to-r from-white to-blue-50/20">
+            <div className="flex gap-4 items-center max-w-4xl mx-auto">
+              <div className="flex-1">
+                <div className="rounded-2xl px-5 py-4 bg-gradient-to-r from-gray-50 to-blue-50/50 backdrop-blur-sm text-gray-700 text-sm border border-gray-200/50 shadow-sm">
+                  {content.prompt}
+                </div>
               </div>
-              <button
+              <motion.button
                 disabled={isBottomBarDisabled}
                 onClick={handleStart}
-                className="h-10 px-4 rounded-lg text-sm text-white disabled:opacity-50 bg-gradient-to-r from-ainleuchtend-primary to-blue-600 hover:shadow-lg transition-all duration-200 font-medium"
+                className="h-12 px-6 rounded-2xl text-sm text-white disabled:opacity-50 bg-gradient-to-r from-ainleuchtend-primary to-blue-600 hover:shadow-xl transition-all duration-300 font-semibold shadow-lg"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <span className="inline-flex items-center gap-2">
-                  <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
-                    <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
-                  </svg>
-                  Send
+                  <motion.div
+                    animate={{ rotate: isBottomBarDisabled ? 360 : 0 }}
+                    transition={{ duration: 1, repeat: isBottomBarDisabled ? Infinity : 0, ease: "linear" }}
+                  >
+                    {isBottomBarDisabled ? (
+                      <Brain className="w-4 h-4" />
+                    ) : (
+                      <Play className="w-4 h-4" />
+                    )}
+                  </motion.div>
+                  {isBottomBarDisabled ? 'Arbeitet...' : 'Starten'}
                 </span>
-              </button>
+              </motion.button>
             </div>
           </div>
         </motion.div>
